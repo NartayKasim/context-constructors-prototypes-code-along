@@ -10,7 +10,9 @@
 let user = {
 	username: "bencallis",
 	email: "bencallis1@gmail.com",
-    // Code here
+  getUserName: function () {
+    return this.username
+  }
 };
 
 
@@ -31,7 +33,7 @@ let user1 = {
 };
 
 const getUsername = function () {
-    // Code here
+    return this.username
 };
 
 const username = getUsername.call(user1);
@@ -56,7 +58,7 @@ function getOtherUsername() {
 	return this.username;
 };
 
-// Code here
+const otherUsername = getOtherUsername.call(user2)
 
 
 
@@ -71,7 +73,8 @@ function getOtherUsername() {
   username2 results in a value of "BillyBob"
 */
 
-// Code here
+const username1 = getOtherUsername.call(user1)
+const username2 = getOtherUsername.call(user2)
 
 
 
@@ -93,7 +96,7 @@ function add(a, b, c) {
 	return this.num + a + b + c;
 }
 
-// Code here
+const result = add.apply(obj, nums)
 
 
 
@@ -115,7 +118,7 @@ const getName = function () {
 	return this.name;
 };
 
-// Code here
+const name = getName.bind(favRapper)
 
 
 
@@ -129,7 +132,7 @@ const getName = function () {
 */
 
 function Car (color, make, year){
-    // Code here
+  return this.color = color, this.make = make, this.year = year
 }
 
 
@@ -149,7 +152,9 @@ function CarMaker (make, model, year) {
 	this.year = year;
     this.move = 0;
     
-    // Code here
+  this.moveCar = function () {
+    this.move += 10
+  }
 };
 
 
@@ -165,7 +170,16 @@ function CarMaker (make, model, year) {
   This number parameter should be added to the player's pointsScored value and should then return that same updated pointsScored value
 */
 
-// Code here
+function Player(name, age, team, pointsScored) {
+  this.name = name;
+  this.age = age;
+  this.team = team;
+  this.pointsScored = pointsScored;
+
+  this.addPoints = function(num) {
+    return this.pointsScored += num
+  }
+}
 
 
 
@@ -189,7 +203,9 @@ function Restaurant(name, type, stars) {
     };
 }
 
-// Code here
+Restaurant.prototype.addStars = function() {
+  return this.stars += num
+}
 
 
 
@@ -214,7 +230,17 @@ function Person(name, age, hometown, email, friends) {
 	this.friends = friends;
 }
 
-// Code here
+Person.prototype.addFriend = function (newFriend) {
+  this.friends.push(newFriend)
+}
+
+Person.prototype.removeFriend = function (notFriend) {
+  for (let i = 0; i < this.friends.length; i++) {
+    if (this.friends[i] === notFriend) {
+      this.friends.splice(i, 1)
+    }
+  }
+}
 
 
 
@@ -234,7 +260,16 @@ function Person(name, age, hometown, email, friends) {
   Make sure to name the properties the same as described previously (id, title, rating)
 */
 
-// Code here
+function User(name, age, email, savedPosts) {
+  this.name = name;
+  this.age = age;
+  this.email = email;
+  this.savedPosts = savedPosts;
+}
+
+User.prototype.addSavedPost = function (id, title, rating) {
+  this.savedPosts.push({id:id, title:title, rating:rating})
+}
 
 
 
@@ -247,7 +282,13 @@ function Person(name, age, hometown, email, friends) {
 
 */
 
-// Code here
+User.prototype.removeSavedPost = function(num) {
+  for (let i = 0; i < this.savedPosts.length; i++) {
+    if (this.savedPosts[i].id === num) {
+      this.savedPosts.splice(i, 1)
+    }
+  }
+}
 
 
 
@@ -260,4 +301,10 @@ function Person(name, age, hometown, email, friends) {
 
 */
 
-// Code here
+User.prototype.changePostRating = function (num, newRating) {
+  for (let i = 0; i < this.savedPosts.length; i++) {
+    if (this.savedPosts[i].id === num) {
+      this.savedPosts[i].rating = newRating;
+    }
+  }
+}
